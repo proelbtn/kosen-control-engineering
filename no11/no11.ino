@@ -23,6 +23,7 @@ void loop() {
   Serial.print(", ");
   Serial.print(ang_d);
   Serial.println("");
-  
-  stepper.step(ang_d);
+
+  int flag = 1 - ((ang_d >= 0) << 1);
+  for (; ang_d != 0; ang_d += flag) stepper.step(flag);
 }
